@@ -7,20 +7,23 @@ import './Expenses.css';
 const Expenses = (props) => {
     const [pickedYear, setPickedYear] = useState('2021');
 
-
     const filterChangeHandler = (selectedYear) => {
         setPickedYear(selectedYear);
-        console.log(selectedYear);
     };
+    // the function returns true if the date stored in the db equals to the picked one otherwise false
+    const filteredExpenses = props.items.filter(expense => {
+        return expense.date.getFullYear().toString() === pickedYear;
+    });
 
     return(
         <Card className="expenses">
             <ExpensesFilter selected={pickedYear} onChangeFilter={filterChangeHandler} />
-            {props.items.map((expense) => (<ExpenseItem
-                key={expense.id}
-                title={expense.title}
-                amount={expense.amount}
-                date={expense.date}
+            {filteredExpenses.length === 0 ? <p>No expenses found</p> : 
+            filteredExpenses.map((item) => (<ExpenseItem
+                key={item.id}
+                title={item.title}
+                amount={item.amount}
+                date={item.date}
             /> ))}
         </Card>
     );
