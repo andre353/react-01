@@ -5,10 +5,10 @@ const ChartBar = props => {
     // setting css height of the ChartBar dinamycally
     let barFillHeight = '0%';
 
-    // if for the given dataPoint we have max greater than 0 = we have expenses in the month
-    if (props.max > 0) {
+    // if for the given dataPoint we have maxValue greater than 0 = we have expenses in the month
+    if (props.maxValue > 0) {
         // getting percentage value, round to the nearest int, converting to a string with % sign
-        barFillHeight = math.round((props.value/props.maxValue) * 100) + '%';
+        barFillHeight = Math.round((props.value/props.maxValue) * 100) + '%';
     }
 
 
